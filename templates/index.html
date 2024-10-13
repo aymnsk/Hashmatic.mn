@@ -4,12 +4,39 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HashMatic</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <h1>Welcome to HashMatic</h1>
-    <form action="/upload" method="post" enctype="multipart/form-data">
-        <input type="file" name="file" accept="image/*,video/*">
-        <button type="submit">Upload</button>
-    </form>
+    <header>
+        <div class="container">
+            <div id="branding">
+                <h1><span class="highlight">Hash</span>Matic</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li class="current"><a href="{{ url_for('home') }}">Home</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Services</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section id="showcase">
+        <div class="container">
+            <h1>Welcome to HashMatic</h1>
+            <p>Upload your image or video to generate captions and hashtags!</p>
+        </div>
+    </section>
+
+    <section id="upload">
+        <div class="container">
+            <h2>Upload Your Content</h2>
+            <form action="{{ url_for('upload_file') }}" method="post" enctype="multipart/form-data">
+                <input type="file" name="file" accept="image/*,video/*">
+                <button type="submit">Upload and Generate</button>
+            </form>
+        </div>
+    </section>
 </body>
 </html>

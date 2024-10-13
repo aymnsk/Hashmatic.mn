@@ -4,16 +4,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HashMatic - Post Result</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <h1>HashMatic Post Result</h1>
-    <h2>Your post has been simulated on {{ post.platform }}!</h2>
-    <p>Posted at: {{ post.timestamp }}</p>
-    <p>File: {{ post.filename }}</p>
-    <h3>Caption:</h3>
-    <p>{{ post.caption }}</p>
-    <h3>Hashtags:</h3>
-    <p>{{ post.hashtags }}</p>
-    <a href="/">Create another post</a>
+    <header>
+        <div class="container">
+            <div id="branding">
+                <h1><span class="highlight">Hash</span>Matic</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="{{ url_for('home') }}">Home</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Services</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section id="result">
+        <div class="container">
+            <h2>Your Post on {{ post.platform }}</h2>
+            <p>Posted at: {{ post.timestamp }}</p>
+            <p>File: {{ post.filename }}</p>
+            <h3>Caption:</h3>
+            <p>{{ post.caption }}</p>
+            <h3>Hashtags:</h3>
+            <p>{{ post.hashtags }}</p>
+            <a href="{{ url_for('home') }}"><button>Create Another Post</button></a>
+        </div>
+    </section>
 </body>
 </html>
