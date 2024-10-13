@@ -4,6 +4,8 @@ import os
 import nltk
 from nltk.corpus import words
 import random
+import json
+from datetime import datetime
 
 app = Flask(__name__)
 
@@ -27,6 +29,22 @@ def generate_hashtags():
     hashtags = ['#' + random.choice(word_list) for _ in range(5)]
     return ' '.join(hashtags)
 
+def simulate_social_media_post(filename, caption, hashtags):
+    post = {
+        "platform": "SimulatedSocialMedia",
+        "timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+        "filename": filename,
+        "caption": caption,
+        "hashtags": hashtags
+    }
+    
+    # Simulate posting by saving to a JSON file
+    with open('posts.json', 'a') as f:
+        json.dump(post, f)
+        f.write('\n')
+    
+    return post
+
 @app.route('/')
 def home():
     return render_template('index.html')
@@ -43,7 +61,8 @@ def upload_file():
         file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
         caption = generate_caption()
         hashtags = generate_hashtags()
-        return render_template('result.html', filename=filename, caption=caption, hashtags=hashtags)
+        post = simulate_social_media_post(filename, caption, hashtags)
+        return render_template('result.html', post=post)
 
 if __name__ == '__main__':
     app.run(debug=True)
